@@ -1,7 +1,3 @@
-import AppKit
-import Foundation
-import ScriptingBridge
-import CryptoKit
 import RaycastExtensionMacro
 
 #exportFunction(selectedFinderItems)

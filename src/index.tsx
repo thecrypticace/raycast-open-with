@@ -6,10 +6,13 @@ import { selectedFinderItems } from "swift:../swift/open-with"
 export default function Command() {
   const { data, isLoading } = useFinderSelection()
 
-  let files = data?.files || []
-  let target = files[0]
+  const { files, apps, target} = {
+    files: data?.files ?? [],
+    apps: data?.apps ?? [],
+    target: data?.files[0] ?? undefined,
+  }
 
-  const { data: apps, visitItem } = useFrecencySorting(target?.openableBy ?? [], {
+  const { data: sortedApps, visitItem } = useFrecencySorting(apps, {
     key: (item) => item.path,
   });
 
@@ -40,15 +43,15 @@ export default function Command() {
           <List.EmptyView
             icon={{ source: Icon.FountainTip }}
             title="No apps found"
-            description={`No apps found that can open ${target.name}`}
+            description={`No apps found that can open ${target!.name}`}
           />
         ) : (
           <>
             <List.Section title="Applications" subtitle={`${apps.length}`}>
-              {apps.map((app) => (
+              {sortedApps.map((app) => (
                 <AppItem
                   key={app.path}
-                  target={target}
+                  target={target!}
                   app={app}
                   onOpen={() => {
                     setSearchText("")
@@ -89,7 +92,13 @@ function AppItem({ target, app, onOpen }: { app: File, target: File, onOpen?: ()
 }
 
 function useFinderSelection() {
-  const { isLoading, data, revalidate } = useCachedPromise(selectedFinderItems<Selection>)
+  const { isLoading, data, revalidate } = useCachedPromise(async () => {
+    let start = performance.now()
+    let result = await selectedFinderItems<Selection>()
+    let end = performance.now()
+    console.log(`selectedFinderItems took ${end - start}ms`)
+    return result
+  })
 
   return {
     isLoading,
@@ -101,9 +110,9 @@ function useFinderSelection() {
 interface File {
   name: string
   path: string
-  openableBy?: File[]
 }
 
 interface Selection {
   files: File[]
+  apps: File[]
 }

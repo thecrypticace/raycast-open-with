@@ -1,5 +1,4 @@
 import AppKit
-import Foundation
 
 /// Represents a file, folder, or application
 struct File {
@@ -28,7 +27,6 @@ extension File: Encodable {
   enum CodingKeys: String, Equatable, CodingKey {
     case name
     case path
-    case openableBy
   }
 
   func encode(to encoder: Encoder) throws {
@@ -36,15 +34,5 @@ extension File: Encodable {
 
     try container.encode(name, forKey: .name)
     try container.encode(path, forKey: .path)
-
-    // Don't traverse more than one level when encoding `openableBy`
-    // otherwise we'll recurse forever when encoding as this list is
-    // basically never empty. If these were separate structs then
-    // obviously this wouldn't be a problem and maybe I should
-    // but… i don't wanna 🤣
-    let fileCodingPath = encoder.codingPath.compactMap { $0 as? File.CodingKeys }
-    if !fileCodingPath.contains(.openableBy) {
-      try container.encode(openableBy, forKey: .openableBy)
-    }
   }
 }
