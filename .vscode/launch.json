@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:open-selection-with}/swift/open-with",
+      "name": "Debug open-with (swift/open-with)",
+      "program": "${workspaceFolder:open-selection-with}/swift/open-with/.build/debug/open-with",
+      "preLaunchTask": "swift: Build Debug open-with (swift/open-with)"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:open-selection-with}/swift/open-with",
+      "name": "Release open-with (swift/open-with)",
+      "program": "${workspaceFolder:open-selection-with}/swift/open-with/.build/release/open-with",
+      "preLaunchTask": "swift: Build Release open-with (swift/open-with)"
+    }
+  ]
+}
