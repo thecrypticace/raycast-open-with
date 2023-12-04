@@ -1,19 +1,20 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "open-selection-with",
-  "title": "Open Selection With",
-  "description": "",
+  "name": "open-finder-selection",
+  "title": "Open Finder Selection",
+  "description": "Show a list of applications to open the selected file with",
   "icon": "command-icon.png",
   "author": "thecrypticace",
   "categories": [
-    "Applications"
+    "Applications",
+    "Productivity"
   ],
   "license": "MIT",
   "commands": [
     {
       "name": "index",
-      "title": "Open Selection With",
-      "description": "Template for showing typeahead search with network results.",
+      "title": "Open Selected File With",
+      "description": "Open the selected file (from Finder) with a specific application",
       "mode": "view"
     }
   ],

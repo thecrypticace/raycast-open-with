@@ -1,3 +1,5 @@
-# Open Selection With Changelog
+# Open Finder Selection
 
-## [Initial Version] - 2023-12-01
+## [Initial Version] - 2023-12-04
+
+Wrote initial version of extension
