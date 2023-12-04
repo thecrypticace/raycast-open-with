@@ -32,17 +32,20 @@ export default function Command() {
         <List.EmptyView
           icon={{ source: Icon.FountainTip }}
           title="No files selected"
-          description="Select a file in the finder first"
+          description="Please select a file in the Finder"
         />
       ) : apps.length === 0 ? (
         <List.EmptyView
           icon={{ source: Icon.FountainTip }}
           title="No apps found"
-          description={`No apps found that can open ${target!.name}`}
+          description={`No known apps can open ${target!.name}`}
         />
       ) : (
         <>
-          <List.Section title="Applications" subtitle={`${apps.length}`}>
+          <List.Section
+            title="Applications"
+            subtitle={`${apps.length} apps found`}
+          >
             {sortedApps.map((app) => (
               <AppItem
                 key={app.path}
